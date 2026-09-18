@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!-- Personal website for an online Quran teacher.
+     Bilingual (EN/AR) via data-i18n + translations.js. No frameworks.
+     Design system: cream + deep emerald + warm gold (light default),
+     charcoal-green + gold + cream (dark via toggle). -->
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Online Quran teacher: Tajweed, recitation correction and Hifz for non-Arabs and diaspora Arabs."
+  />
+  <title>Quran Teacher — Online Quran Lessons</title>
+
+  <!-- Typography:
+       Headings/brand/quotes: Playfair Display (elegant serif, Latin).
+       Body/nav/labels: IBM Plex Sans Arabic (clean, renders Latin + Arabic).
+       Quranic verse: Aref Ruqaa / Amiri (calligraphy-inspired Arabic). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Accessibility: skip straight to main content -->
+  <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+
+  <!-- ================= 1. STICKY HEADER / NAV ================= -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <!-- Brand: 8-point rosette inside a rounded square + serif site name -->
+      <a class="brand" href="#home" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="34" height="34">
+            <rect x="4.5" y="4.5" width="31" height="31" rx="9" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <g fill="none" stroke-width="1.6" class="brand-star">
+              <rect x="13" y="13" width="14" height="14" />
+              <rect x="13" y="13" width="14" height="14" transform="rotate(45 20 20)" />
+              <circle cx="20" cy="20" r="1.8" fill="currentColor" stroke="none" />
+            </g>
+          </svg>
+        </span>
+        <span class="brand-name" data-i18n="siteName">Quran Teacher</span>
+      </a>
+
+      <!-- Primary nav (section anchors; "How It Works" lives on-page + footer) -->
+      <nav class="site-nav" id="siteNav" aria-label="Primary">
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#teach" data-i18n="navTeach">What I Teach</a>
+        <a href="#paths" data-i18n="navPaths">Paths</a>
+        <a href="#experience" data-i18n="navExperience">Experience</a>
+        <a href="#pricing" data-i18n="navPricing">Pricing</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+      </nav>
+
+      <!-- Actions: filled Contact pill + circular toggles + circular menu -->
+      <div class="header-actions">
+        <a href="#contact" class="btn btn-contact" data-i18n="navContact">Contact</a>
+        <button id="langToggle" class="icon-btn" type="button" data-i18n-aria="langToggleLabel" aria-label="Switch to Arabic">
+          <span class="toggle-label" aria-hidden="true">عربي</span>
+        </button>
+        <button id="themeToggle" class="icon-btn" type="button" data-i18n-aria="themeToggleLabel" aria-label="Toggle dark / light mode" aria-pressed="false">
+          <!-- Sun = light mode, moon = dark mode (swapped via CSS per theme) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4.2" />
+              <path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7" />
+            </g>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" />
+          </svg>
+        </button>
+        <button id="menuToggle" class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="siteNav" data-i18n-aria="menuButtonLabel" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+              <path d="M4 7.5h16M4 12h16M4 16.5h16" />
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= 2. HERO (55/45 two-column) ================= -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <!-- Left: copy -->
+        <div class="hero-copy reveal">
+          <p class="eyebrow" data-i18n="heroEyebrow">Online Quran lessons – for non-Arabs &amp; diaspora Arabs</p>
+          <!-- data-i18n-html: translation contains <em> around the gold accent word -->
+          <h1 id="hero-title" data-i18n-html="heroTitle">Learn to recite the Quran<br /><em>beautifully,</em> step by step</h1>
+          <p class="lead" data-i18n="heroSubtitle">One-to-one Tajweed, recitation correction, and Hifz coaching online — calm, patient teaching for beginners and returning learners.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary"><span data-i18n="heroCtaPrimary">Book a free trial lesson</span><span class="arr" aria-hidden="true">→</span></a>
+            <a href="#paths" class="btn btn-outline" data-i18n="heroCtaSecondary">Explore learning paths</a>
+          </div>
+          <div class="orn-divider" aria-hidden="true">
+            <span class="orn-line"></span>
+            <svg class="rosette" viewBox="0 0 24 24" width="18" height="18">
+              <g fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="6.5" y="6.5" width="11" height="11" />
+                <rect x="6.5" y="6.5" width="11" height="11" transform="rotate(45 12 12)" />
+                <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+              </g>
+            </svg>
+            <span class="orn-line"></span>
+          </div>
+          <p class="hero-caption" data-i18n="heroTrust">Trusted by students in many countries · Male &amp; female students welcome</p>
+        </div>
+
+        <!-- Right: mihrab illustration + verse strip (pure inline SVG, no stock) -->
+        <div class="hero-art reveal">
+          <figure class="art-frame">
+            <svg class="art-svg" viewBox="0 0 380 500" role="img" aria-labelledby="artTitle artDesc">
+              <title id="artTitle">Mihrab niche with olive branch and Quran books</title>
+              <desc id="artDesc">A softly lit arched niche with geometric pattern, a potted olive branch, and two ornate Quran books on marble.</desc>
+              <defs>
+                <pattern id="artPattern" width="34" height="34" patternUnits="userSpaceOnUse">
+                  <g class="art-pat">
+                    <rect x="10" y="10" width="14" height="14" />
+                    <rect x="10" y="10" width="14" height="14" transform="rotate(45 17 17)" />
+                    <circle cx="17" cy="17" r="1.2" />
+                  </g>
+                </pattern>
+                <linearGradient id="artFloor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" class="floor-a" />
+                  <stop offset="1" class="floor-b" />
+                </linearGradient>
+                <linearGradient id="artGlow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+                </linearGradient>
+                <clipPath id="archClip">
+                  <path d="M84 428 L84 205 C84 132 126 80 190 42 C254 80 296 132 296 205 L296 428 Z" />
+                </clipPath>
+              </defs>
+
+              <!-- Floor + soft contact shadow -->
+              <rect class="art-floor" x="0" y="424" width="380" height="76" fill="url(#artFloor)" />
+              <ellipse class="art-shadow" cx="190" cy="440" rx="148" ry="22" />
+
+              <!-- Outer arch frame (thick stone/bronze moulding) -->
+              <path class="arch-frame" d="M68 430 L68 202 C68 124 114 68 190 26 C266 68 312 124 312 202 L312 430" />
+              <!-- Inner wall -->
+              <path class="arch-wall" d="M84 428 L84 205 C84 132 126 80 190 42 C254 80 296 132 296 205 L296 428 Z" />
+              <!-- Pattern + sunlight inside the niche -->
+              <g clip-path="url(#archClip)">
+                <rect x="66" y="24" width="248" height="406" fill="url(#artPattern)" />
+                <polygon class="sun-streak" points="108,30 158,30 118,428 78,428" />
+                <polygon class="sun-streak s2" points="172,30 192,30 158,428 138,428" />
+                <rect x="66" y="24" width="248" height="406" fill="url(#artGlow)" opacity="0.55" />
+              </g>
+              <!-- Inner hairline moulding -->
+              <path class="arch-inner-line" d="M84 428 L84 205 C84 132 126 80 190 42 C254 80 296 132 296 205 L296 428" />
+
+              <!-- Olive branch in vase -->
+              <g class="olive">
+                <path class="stem" d="M132 424 C130 380 128 330 142 282" />
+                <path class="stem" d="M136 424 C140 384 150 344 170 312" />
+                <path class="stem" d="M128 424 C122 392 112 366 98 346" />
+                <g class="leaves">
+                  <ellipse cx="146" cy="296" rx="7" ry="20" transform="rotate(24 146 296)" />
+                  <ellipse cx="162" cy="322" rx="7" ry="19" transform="rotate(38 162 322)" />
+                  <ellipse cx="134" cy="330" rx="7" ry="19" transform="rotate(-18 134 330)" />
+                  <ellipse cx="120" cy="360" rx="6.5" ry="17" transform="rotate(-32 120 360)" />
+                  <ellipse cx="148" cy="362" rx="6.5" ry="17" transform="rotate(20 148 362)" />
+                  <ellipse cx="106" cy="352" rx="6" ry="15" transform="rotate(-40 106 352)" />
+                  <ellipse cx="172" cy="352" rx="6" ry="15" transform="rotate(44 172 352)" />
+                  <ellipse cx="138" cy="392" rx="6" ry="15" transform="rotate(-14 138 392)" />
+                </g>
+                <path class="vase" d="M112 424 L114 398 C114 388 122 382 128 376 L128 366 L140 366 L140 376 C146 382 154 388 154 398 L156 424 C156 430 151 433 134 433 C117 433 112 430 112 424 Z" />
+                <ellipse class="vase-rim" cx="134" cy="366" rx="9" ry="2.6" />
+              </g>
+
+              <!-- Two stacked ornate Quran books -->
+              <g class="books">
+                <ellipse class="book-shadow" cx="238" cy="452" rx="86" ry="10" />
+                <!-- Bottom book -->
+                <rect class="book-cover" x="162" y="408" width="152" height="32" rx="3" />
+                <rect class="book-pages" x="162" y="412" width="12" height="24" />
+                <rect class="book-trim" x="178" y="413" width="128" height="22" rx="1.5" />
+                <circle class="book-medal" cx="242" cy="424" r="7" />
+                <circle class="book-medal-dot" cx="242" cy="424" r="2.4" />
+                <!-- Top book -->
+                <rect class="book-cover" x="172" y="378" width="134" height="30" rx="3" />
+                <rect class="book-pages" x="172" y="382" width="11" height="22" />
+                <rect class="book-trim" x="187" y="383" width="111" height="20" rx="1.5" />
+                <circle class="book-medal" cx="242" cy="393" r="6.4" />
+                <circle class="book-medal-dot" cx="242" cy="393" r="2.2" />
+              </g>
+
+              <!-- Marble sheen -->
+              <rect class="floor-sheen" x="0" y="424" width="380" height="10" />
+            </svg>
+          </figure>
+
+          <!-- Verse strip -->
+          <aside class="verse" aria-label="Quranic verse">
+            <p class="verse-ar" lang="ar" dir="rtl">وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</p>
+            <p class="verse-en" data-i18n="verseEn">“And recite the Quran with measured recitation.”</p>
+            <p class="verse-cite" data-i18n="verseCite">(Al-Muzzammil 73:4)</p>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Feature row -->
+      <div class="container">
+        <ul class="hero-features reveal">
+          <li>
+            <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="8" r="3" />
+                <path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" />
+                <circle cx="16.5" cy="9.5" r="2.4" />
+                <path d="M16 14.2c2.2.3 3.9 1.8 4.4 4.3" />
+              </g>
+            </svg>
+            <span data-i18n="feat1">One-to-one sessions</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="5.5" width="16" height="14" rx="2.5" />
+                <path d="M4 10h16M8.5 3.5v3M15.5 3.5v3" />
+                <path d="M14.6 14.2a3 3 0 1 0 1.4 2.3" />
+              </g>
+            </svg>
+            <span data-i18n="feat2">Flexible scheduling</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8" />
+                <path d="M4 12h16M12 4c-4.8 4.6-4.8 11.4 0 16M12 4c4.8 4.6 4.8 11.4 0 16" />
+              </g>
+            </svg>
+            <span data-i18n="feat3">Non-Arab students welcome</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="7.5" r="3.4" />
+                <path d="M5.5 19.5c.8-3.8 3.4-5.8 6.5-5.8s5.7 2 6.5 5.8" />
+                <path d="M9.2 10.6c.6 1.6 1.6 2.4 2.8 2.4s2.2-.8 2.8-2.4" />
+              </g>
+            </svg>
+            <span data-i18n="feat4">Male / female students</span>
+          </li>
+        </ul>
+
+        <div class="orn-divider orn-divider--wide reveal" aria-hidden="true">
+          <span class="orn-line"></span>
+          <svg class="rosette" viewBox="0 0 24 24" width="18" height="18">
+            <g fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="6.5" y="6.5" width="11" height="11" />
+              <rect x="6.5" y="6.5" width="11" height="11" transform="rotate(45 12 12)" />
+              <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+            </g>
+          </svg>
+          <span class="orn-line"></span>
+        </div>
+
+        <figure class="hero-quote reveal">
+          <blockquote>
+            <p data-i18n="quoteText">“The best of you are those who learn the Quran and teach it.”</p>
+          </blockquote>
+          <figcaption data-i18n="quoteCite">(Sahih al-Bukhari)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= 3. ABOUT ================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container narrow reveal">
+        <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
+        <h2 id="about-title" data-i18n="aboutTitle">[Placeholder] My journey with the Quran</h2>
+        <p class="lead" data-i18n="aboutLead">[Placeholder] Lead sentence: 1–2 lines summarising who you are as a teacher.</p>
+        <p data-i18n="aboutP1">[Placeholder] Paragraph 1: personal journey with the Quran — study, teachers/ijazah, motivation to teach.</p>
+        <p data-i18n="aboutP2">[Placeholder] Paragraph 2: teaching philosophy — patience, love for the Quran, focus on non-Arab and diaspora students.</p>
+        <ul class="check-list">
+          <li data-i18n="aboutItem1">[Placeholder] Value / highlight 1 — e.g. patient with beginners</li>
+          <li data-i18n="aboutItem2">[Placeholder] Value / highlight 2 — e.g. clear Tajweed breakdown</li>
+          <li data-i18n="aboutItem3">[Placeholder] Value / highlight 3 — e.g. flexible scheduling</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 4. WHAT I TEACH ================= -->
+    <section class="section section-alt" id="teach" aria-labelledby="teach-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="teachEyebrow">What I Teach</p>
+          <h2 id="teach-title" data-i18n="teachTitle">[Placeholder] Four ways I can help you</h2>
+          <p class="section-sub" data-i18n="teachSub">[Placeholder] Short intro line: all lessons are live 1-on-1, online.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card reveal">
+            <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
+            <h3 data-i18n="teach1Title">Tajweed</h3>
+            <p data-i18n="teach1Desc">[Placeholder] Rules of Tajweed explained simply, with guided practice.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
+            <h3 data-i18n="teach2Title">Recitation Correction</h3>
+            <p data-i18n="teach2Desc">[Placeholder] Fix pronunciation and fluency, verse by verse.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
+            <h3 data-i18n="teach3Title">Hifz (Memorization)</h3>
+            <p data-i18n="teach3Desc">[Placeholder] Structured memorization plan with revision system.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
+            <h3 data-i18n="teach4Title">Arabic Reading from Scratch</h3>
+            <p data-i18n="teach4Desc">[Placeholder] Noorani-style foundation for complete beginners.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. PATHS (tabs) ================= -->
+    <section class="section" id="paths" aria-labelledby="paths-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="pathsEyebrow">Learning Paths</p>
+          <h2 id="paths-title" data-i18n="pathsTitle">[Placeholder] Choose your track</h2>
+          <p class="section-sub" data-i18n="pathsSub">[Placeholder] Two clear tracks — pick one, or ask for guidance in the free trial.</p>
+        </div>
+
+        <div class="tabs reveal">
+          <div class="tab-list" role="tablist" aria-label="Learning paths">
+            <button class="tab-btn is-active" id="tab-correction" role="tab" aria-selected="true" aria-controls="panel-correction" data-i18n="pathsTabCorrection">Recitation Correction</button>
+            <button class="tab-btn" id="tab-hifz" role="tab" aria-selected="false" aria-controls="panel-hifz" tabindex="-1" data-i18n="pathsTabHifz">Memorization (Hifz)</button>
+          </div>
+
+          <div class="tab-panel is-active" id="panel-correction" role="tabpanel" aria-labelledby="tab-correction" tabindex="0">
+            <h3 data-i18n="pathCorrTitle">[Placeholder] Path A — Recitation Correction</h3>
+            <p data-i18n="pathCorrDesc">[Placeholder] For students who can read Arabic but want accurate, fluent, beautiful recitation.</p>
+            <p class="path-for" data-i18n="pathCorrFor">[Placeholder] Best for: beginners · returners · diaspora Arabs</p>
+            <ul class="check-list">
+              <li data-i18n="pathCorrLi1">[Placeholder] Level check + personal correction plan</li>
+              <li data-i18n="pathCorrLi2">[Placeholder] Tajweed applied directly on your recitation</li>
+              <li data-i18n="pathCorrLi3">[Placeholder] Fluency drills, short surahs → longer passages</li>
+              <li data-i18n="pathCorrLi4">[Placeholder] Regular feedback + practice recordings</li>
+            </ul>
+            <p class="path-note" data-i18n="pathCorrNote">[Placeholder] Outcome: confident, correct recitation of Juz’ 30 → beyond.</p>
+          </div>
+
+          <div class="tab-panel" id="panel-hifz" role="tabpanel" aria-labelledby="tab-hifz" tabindex="0" hidden>
+            <h3 data-i18n="pathHifzTitle">[Placeholder] Path B — Memorization (Hifz)</h3>
+            <p data-i18n="pathHifzDesc">[Placeholder] For students who recite correctly and want to memorize with strong retention.</p>
+            <p class="path-for" data-i18n="pathHifzFor">[Placeholder] Best for: committed learners · youth &amp; adults</p>
+            <ul class="check-list">
+              <li data-i18n="pathHifzLi1">[Placeholder] Memorization amount tailored to your capacity</li>
+              <li data-i18n="pathHifzLi2">[Placeholder] Daily revision cycle (near + distant revision)</li>
+              <li data-i18n="pathHifzLi3">[Placeholder] Tajweed-checked memorization, not rushed</li>
+              <li data-i18n="pathHifzLi4">[Placeholder] Monthly progress review with parents / student</li>
+            </ul>
+            <p class="path-note" data-i18n="pathHifzNote">[Placeholder] Outcome: steady, retained Hifz with itqan (mastery).</p>
+          </div>
+
+          <p class="paths-cta">
+            <a href="#contact" class="btn btn-outline" data-i18n="pathsCta">Not sure? Book a free level check</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. EXPERIENCE ================= -->
+    <section class="section section-alt" id="experience" aria-labelledby="exp-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="expEyebrow">Experience</p>
+          <h2 id="exp-title" data-i18n="expTitle">[Placeholder] Teaching background</h2>
+          <p class="section-sub" data-i18n="expLead">[Placeholder] Summary line: years, settings, student types.</p>
+        </div>
+        <div class="exp-grid">
+          <div class="reveal">
+            <p data-i18n="expP1">[Placeholder] Paragraph: online teaching experience, non-Arab and diaspora Arab students, teaching style, any ijazah/certification to be listed here later.</p>
+            <p class="path-note" data-i18n="expNote">[Placeholder] Credentials line: e.g. Ijazah / certification details go here.</p>
+          </div>
+          <!-- Placeholder stat cards — replace numbers with real ones later -->
+          <dl class="stat-row reveal">
+            <div class="stat">
+              <dt data-i18n="expStat1Label">[Placeholder] Years teaching</dt>
+              <dd data-i18n="expStat1Num">[Placeholder] 5+</dd>
+            </div>
+            <div class="stat">
+              <dt data-i18n="expStat2Label">[Placeholder] Students taught</dt>
+              <dd data-i18n="expStat2Num">[Placeholder] 100+</dd>
+            </div>
+            <div class="stat">
+              <dt data-i18n="expStat3Label">[Placeholder] Countries / time zones</dt>
+              <dd data-i18n="expStat3Num">[Placeholder] 10+</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 7. PRICING ================= -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="pricingEyebrow">Pricing</p>
+          <h2 id="pricing-title" data-i18n="pricingTitle">[Placeholder] Simple packages</h2>
+          <p class="section-sub" data-i18n="pricingSub">[Placeholder] Hourly pricing + package tiers. Final prices to be added later.</p>
+        </div>
+
+        <div class="card-grid pricing-grid">
+          <article class="card price-card reveal">
+            <h3 data-i18n="price1Name">[Placeholder] Single Lesson</h3>
+            <p class="price"><span data-i18n="price1Price">[Placeholder] $X</span> <small data-i18n="price1Per">[Placeholder] / lesson</small></p>
+            <ul class="plain-list">
+              <li data-i18n="price1F1">[Placeholder] 45–60 min live lesson</li>
+              <li data-i18n="price1F2">[Placeholder] Personal feedback</li>
+              <li data-i18n="price1F3">[Placeholder] No commitment</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline" data-i18n="price1Cta">Book trial</a>
+          </article>
+
+          <article class="card price-card featured reveal">
+            <span class="card-badge" data-i18n="price2Badge">[Placeholder] Most popular</span>
+            <h3 data-i18n="price2Name">[Placeholder] Monthly — 2× / week</h3>
+            <p class="price"><span data-i18n="price2Price">[Placeholder] $XX</span> <small data-i18n="price2Per">[Placeholder] / month (8 lessons)</small></p>
+            <ul class="plain-list">
+              <li data-i18n="price2F1">[Placeholder] Fixed weekly slots</li>
+              <li data-i18n="price2F2">[Placeholder] Structured plan + revision</li>
+              <li data-i18n="price2F3">[Placeholder] Progress notes</li>
+              <li data-i18n="price2F4">[Placeholder] Rescheduling policy</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary" data-i18n="price2Cta">Choose plan</a>
+          </article>
+
+          <article class="card price-card reveal">
+            <h3 data-i18n="price3Name">[Placeholder] Monthly — 3× / week (Hifz)</h3>
+            <p class="price"><span data-i18n="price3Price">[Placeholder] $XX</span> <small data-i18n="price3Per">[Placeholder] / month (12 lessons)</small></p>
+            <ul class="plain-list">
+              <li data-i18n="price3F1">[Placeholder] Intensive Hifz + revision</li>
+              <li data-i18n="price3F2">[Placeholder] Daily practice guidance</li>
+              <li data-i18n="price3F3">[Placeholder] Monthly parent review</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline" data-i18n="price3Cta">Choose plan</a>
+          </article>
+        </div>
+        <p class="fine-print reveal" data-i18n="pricingNote">[Placeholder] Note: sibling discounts · payment methods · cancellation policy go here.</p>
+      </div>
+    </section>
+
+    <!-- ================= 8. HOW IT WORKS ================= -->
+    <section class="section section-alt" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="howEyebrow">How It Works</p>
+          <h2 id="how-title" data-i18n="howTitle">[Placeholder] Start in four simple steps</h2>
+          <p class="section-sub" data-i18n="howSub">[Placeholder] From first message to regular lessons.</p>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">١ · 1</span>
+            <h3 data-i18n="how1Title">[Placeholder] 1 · Book a free trial</h3>
+            <p data-i18n="how1Desc">[Placeholder] Send the form or WhatsApp message below.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">٢ · 2</span>
+            <h3 data-i18n="how2Title">[Placeholder] 2 · Level check</h3>
+            <p data-i18n="how2Desc">[Placeholder] Short recitation + goals discussion.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">٣ · 3</span>
+            <h3 data-i18n="how3Title">[Placeholder] 3 · Personal plan</h3>
+            <p data-i18n="how3Desc">[Placeholder] Track, schedule, and materials agreed.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">٤ · 4</span>
+            <h3 data-i18n="how4Title">[Placeholder] 4 · Learn weekly</h3>
+            <p data-i18n="how4Desc">[Placeholder] Live lessons + practice between classes.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= 9. CONTACT / BOOKING ================= -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="contactEyebrow">Contact / Booking</p>
+          <h2 id="contact-title" data-i18n="contactTitle">[Placeholder] Book your free trial lesson</h2>
+          <p class="section-sub" data-i18n="contactSub">[Placeholder] Fill the form or message directly on WhatsApp. Reply time placeholder.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Placeholder form: front-end only for now (no backend wiring yet) -->
+          <form class="card form-card reveal" id="bookingForm" novalidate>
+            <div class="field">
+              <label for="fName" data-i18n="formNameLabel">Your name</label>
+              <input id="fName" name="name" type="text" autocomplete="name" required data-i18n-ph="formNamePh" placeholder="[Placeholder] e.g. Ahmed / Sarah" />
+            </div>
+            <div class="field">
+              <label for="fContact" data-i18n="formContactLabel">Email or WhatsApp number</label>
+              <input id="fContact" name="contact" type="text" autocomplete="email" required data-i18n-ph="formContactPh" placeholder="[Placeholder] How can I reach you?" />
+            </div>
+            <div class="field">
+              <label for="fLevel" data-i18n="formLevelLabel">Your level</label>
+              <select id="fLevel" name="level">
+                <option value="" data-i18n="formLevelDefault">Choose…</option>
+                <option value="beginner" data-i18n="formLevelOpt1">[Placeholder] Complete beginner (cannot read Arabic)</option>
+                <option value="correction" data-i18n="formLevelOpt2">[Placeholder] Can read, want Tajweed / correction</option>
+                <option value="hifz" data-i18n="formLevelOpt3">[Placeholder] Want to memorize (Hifz)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fMsg" data-i18n="formMsgLabel">Message (goals, availability)</label>
+              <textarea id="fMsg" name="message" rows="4" data-i18n-ph="formMsgPh" placeholder="[Placeholder] e.g. I want my son (9) to memorize Juz’ 30…"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" data-i18n="formSubmit">Send booking request</button>
+            <p class="fine-print" data-i18n="formNote">[Placeholder] Note: this demo form does not send yet — wiring comes later.</p>
+            <p class="form-success" id="formSuccess" role="status" hidden></p>
+          </form>
+
+          <aside class="contact-side reveal">
+            <a class="card whatsapp-card" href="https://wa.me/0000000000" target="_blank" rel="noopener">
+              <span class="wa-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.2-4.8-4.1-5-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.5 2.6 1.6.3.2.5.1.7-.1l.8-.9c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.6Z"/></svg>
+              </span>
+              <span>
+                <strong data-i18n="whatsappLabel">Message on WhatsApp</strong>
+                <small data-i18n="whatsappSub">[Placeholder] Fastest way to book · placeholder number</small>
+              </span>
+            </a>
+            <div class="card">
+              <h3 data-i18n="contactAltTitle">[Placeholder] Prefer email?</h3>
+              <p data-i18n="contactAltText">[Placeholder] teacher@example.com — replace with real address.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 10. FAQ ================= -->
+    <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+      <div class="container narrow">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="faqEyebrow">FAQ</p>
+          <h2 id="faq-title" data-i18n="faqTitle">[Placeholder] Common questions</h2>
+          <p class="section-sub" data-i18n="faqSub">[Placeholder] Short answers — details in the trial lesson.</p>
+        </div>
+
+        <div class="faq-list reveal">
+          <!-- Accordion wired in script.js (single-open, animated, accessible) -->
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq1Q">[Placeholder] Who are lessons for?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq1A">[Placeholder] Answer: non-Arabs, diaspora Arabs, kids &amp; adults, all levels.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq2Q">[Placeholder] Where do lessons happen?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq2A">[Placeholder] Answer: live online via Zoom / Meet — link sent before class.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq3Q">[Placeholder] How long is a lesson?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq3A">[Placeholder] Answer: typically 45–60 minutes, adjusted for kids.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq4Q">[Placeholder] What do I need to prepare?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq4A">[Placeholder] Answer: quiet place, Quran/mushaf, notebook. Nothing else.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq5Q">[Placeholder] How does payment work?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq5A">[Placeholder] Answer: monthly packages, payment methods to be confirmed.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 11. FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-brand" data-i18n="siteName">Quran Teacher</p>
+        <p class="footer-tag" data-i18n="footerTagline">[Placeholder] Short closing line — e.g. serving Quran learners worldwide.</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="footer-h" data-i18n="footerExploreTitle">Explore</p>
+        <ul class="plain-list footer-links">
+          <li><a href="#about" data-i18n="navAbout">About</a></li>
+          <li><a href="#teach" data-i18n="navTeach">What I Teach</a></li>
+          <li><a href="#pricing" data-i18n="navPricing">Pricing</a></li>
+          <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="footer-h" data-i18n="footerContactTitle">Contact</p>
+        <!-- TODO: replace with real contact/social links -->
+        <ul class="plain-list footer-links">
+          <li><span data-i18n="footerEmailPh">teacher@example.com</span></li>
+          <li><span data-i18n="footerWhatsappPh">WhatsApp: +00 000 000 000</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p><span data-i18n="footerRights">[Placeholder] © year · Teacher name. All rights reserved.</span> · <span id="year">2026</span></p>
+      <p class="footer-note" data-i18n="footerNote">[Placeholder] Made with sincerity for the sake of Allah.</p>
+    </div>
+  </footer>
+
+  <!-- Order matters: strings first, then behaviour. No modules/build tools. -->
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
