@@ -11,7 +11,8 @@
      PathsTabs       -> accessible tab switching for #paths
      FaqAccordion    -> single-open animated accordion
      MobileMenu      -> hamburger open/close for small screens
-     BookingForm     -> demo-only submit handler (backend comes later)
+     BillingOptions  -> pricing frequency/format pills (preference only)
+     BookingForm     -> Formspree booking submit with status line
      FooterMeta      -> dynamic copyright year
 
    Conventions: `const` for stable references, `let` only for values that
@@ -143,15 +144,18 @@ const LanguageManager = {
   },
 
   set(lang, { animate = true } = {}) {
+    const notify = () => window.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));
     if (animate && !REDUCED_MOTION) {
       // Soft cross-fade while text swaps (see body.is-switching in CSS).
       document.body.classList.add("is-switching");
       setTimeout(() => {
         this.paint(lang);
         document.body.classList.remove("is-switching");
+        notify();
       }, 180);
     } else {
       this.paint(lang);
+      notify();
     }
     Storage.set(LANG_KEY, lang);
   },
@@ -331,28 +335,141 @@ const MobileMenu = {
   },
 };
 
-/* ---------- Concern: demo booking form (no backend yet) ---------- */
-const BookingForm = {
-  init() {
-    const form = document.getElementById("bookingForm");
-    const successBox = document.getElementById("formSuccess");
-    if (!form) return;
+/* ---------- Concern: pricing schedule selectors ----------
+   Frequency (1/2/3x per week) and format (1-on-1 / small group) are
+   preference pills only — they shape the summary line, never the rate. */
+const BillingOptions = {
+  groups: [],
+  summary: null,
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (successBox) {
-        const lang = LanguageManager.getCurrent();
-        successBox.textContent =
-          LanguageManager.pick(lang).formSuccess ??
-          LanguageManager.pick("en").formSuccess ??
-          "Thank you!";
-        successBox.hidden = false;
-        successBox.scrollIntoView({
-          behavior: REDUCED_MOTION ? "auto" : "smooth",
-          block: "nearest",
+  paintGroup(group) {
+    group.pills.forEach((pill) => {
+      const on = pill === group.selected;
+      pill.classList.toggle("is-selected", on);
+      pill.setAttribute("aria-checked", String(on));
+      pill.tabIndex = on ? 0 : -1;
+    });
+  },
+
+  select(group, pill, focus = false) {
+    group.selected = pill;
+    this.paintGroup(group);
+    this.render();
+    if (focus) pill.focus();
+  },
+
+  render() {
+    if (!this.summary) return;
+    const lang = LanguageManager.getCurrent();
+    const t = (key) => LanguageManager.pick(lang)[key] ?? LanguageManager.pick("en")[key] ?? "";
+    const freq = this.groups[0] ? t(this.groups[0].selected.dataset.value) : "";
+    const fmt = this.groups[1] ? t(this.groups[1].selected.dataset.value) : "";
+    this.summary.textContent = t("billingSummary")
+      .replace("{freq}", freq)
+      .replace("{format}", fmt);
+  },
+
+  init() {
+    this.summary = document.getElementById("billingSummary");
+    document.querySelectorAll(".pill-group").forEach((root) => {
+      const pills = [...root.querySelectorAll(".pill")];
+      if (pills.length === 0) return;
+      const group = {
+        root,
+        pills,
+        selected: pills.find((p) => p.classList.contains("is-selected")) ?? pills[0],
+      };
+      pills.forEach((pill, i) => {
+        pill.addEventListener("click", () => this.select(group, pill));
+        pill.addEventListener("keydown", (e) => {
+          let next = null;
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") next = pills[(i + 1) % pills.length];
+          if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = pills[(i - 1 + pills.length) % pills.length];
+          if (next) {
+            e.preventDefault();
+            this.select(group, next, true);
+          }
         });
+      });
+      this.paintGroup(group);
+      this.groups.push(group);
+    });
+    window.addEventListener("langchange", () => this.render());
+    this.render();
+  },
+};
+
+/* ---------- Concern: booking form (Formspree) ----------
+   Posts to the form's `action` URL. While the action still holds the
+   [FORMSPREE_ENDPOINT] placeholder, submissions are simulated locally
+   so the page never hits the network. */
+const BookingForm = {
+  form: null,
+  status: null,
+  submitBtn: null,
+  lastKind: null, // 'sending' | 'ok' | 'err' — re-translated on langchange
+
+  endpoint() {
+    return this.form?.getAttribute("action") ?? "";
+  },
+
+  isPlaceholder() {
+    return this.endpoint().includes("[FORMSPREE_ENDPOINT]");
+  },
+
+  text(key) {
+    const lang = LanguageManager.getCurrent();
+    return LanguageManager.pick(lang)[key] ?? LanguageManager.pick("en")[key] ?? "";
+  },
+
+  show(kind) {
+    this.lastKind = kind;
+    if (!this.status) return;
+    const key = kind === "ok" ? "formSuccess" : kind === "err" ? "formError" : "formSending";
+    this.status.textContent = this.text(key);
+    this.status.dataset.kind = kind;
+    this.status.hidden = false;
+  },
+
+  init() {
+    this.form = document.getElementById("bookingForm");
+    if (!this.form) return;
+    this.status = document.getElementById("formStatus");
+    this.submitBtn = this.form.querySelector('[type="submit"]');
+
+    this.form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!this.form.checkValidity()) {
+        this.form.reportValidity();
+        return;
       }
-      form.reset();
+      this.show("sending");
+      if (this.submitBtn) this.submitBtn.disabled = true;
+      try {
+        if (this.isPlaceholder()) {
+          // Placeholder endpoint: simulate a send, no network traffic.
+          await new Promise((resolve) => setTimeout(resolve, REDUCED_MOTION ? 60 : 700));
+        } else {
+          const res = await fetch(this.endpoint(), {
+            method: "POST",
+            body: new FormData(this.form),
+            headers: { Accept: "application/json" },
+          });
+          if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+        }
+        this.show("ok");
+        this.form.reset();
+        this.status.scrollIntoView({ behavior: REDUCED_MOTION ? "auto" : "smooth", block: "nearest" });
+      } catch {
+        this.show("err");
+      } finally {
+        if (this.submitBtn) this.submitBtn.disabled = false;
+      }
+    });
+
+    // Keep a visible status line in the current language.
+    window.addEventListener("langchange", () => {
+      if (this.lastKind && this.status && !this.status.hidden) this.show(this.lastKind);
     });
   },
 };
@@ -374,6 +491,7 @@ const App = {
     PathsTabs.init();
     FaqAccordion.init();
     MobileMenu.init();
+    BillingOptions.init();
     BookingForm.init();
     FooterMeta.init();
   },

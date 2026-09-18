@@ -17,7 +17,7 @@
   --surface: #fffdf7;          /* cards */
   --ink: #103b32;              /* deep emerald headings */
   --body: #5c6862;             /* gray body text */
-  --muted: #8b948e;            /* faint captions */
+  --muted: #646f69;            /* faint captions (AA on cream: 4.8:1) */
   --brand: #0d5c4b;            /* emerald fills / icons */
   --brand-deep: #093f34;
   --brand-ink: #fdf9ee;        /* text on emerald */
@@ -26,6 +26,7 @@
   --gold-soft: #f0e4c6;
   --line: #e2d8bf;             /* thin hairline dividers */
   --card-border: #e7ddc4;
+  --danger: #b3402e;            /* form error state only */
   --shadow: 0 12px 32px rgba(27, 64, 55, 0.1);
   --shadow-lift: 0 18px 44px rgba(27, 64, 55, 0.16);
 
@@ -41,6 +42,10 @@
   --leaf-deep: #4c5739;
   --floor-shine: rgba(255, 255, 255, 0.7);
   --art-glow: rgba(163, 126, 44, 0.14);
+  /* Quran books keep their deep-green/gold binding in both themes (per reference) */
+  --book-cover: #13453a;
+  --book-spine: #0b2f27;
+  --book-pages: #e9e0c8;
 
   --radius: 16px;
   --radius-sm: 10px;
@@ -74,6 +79,7 @@ html[data-theme="dark"] {
   --gold-soft: #2b2413;
   --line: rgba(211, 171, 95, 0.3);
   --card-border: #263734;
+  --danger: #d98a73;            /* form error state only (softened for dark) */
   --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   --shadow-lift: 0 18px 48px rgba(0, 0, 0, 0.6);
 
@@ -89,6 +95,9 @@ html[data-theme="dark"] {
   --leaf-deep: #5d6a44;
   --floor-shine: rgba(211, 171, 95, 0.18);
   --art-glow: rgba(211, 171, 95, 0.12);
+  --book-cover: #14352c;
+  --book-spine: #0a201b;
+  --book-pages: #e9e0c8;
 }
 
 /* ---------- 3. Base ---------- */
@@ -169,6 +178,17 @@ img, svg { max-width: 100%; }
 
 body.is-switching { opacity: 0; }
 
+/* Identical theme cross-fade for every explicitly-colored element.
+   (Most text inherits from body, which already transitions; this covers
+   the elements that set their own color so nothing snaps.) */
+h1, h2, h3, .brand-name, .eyebrow, .lead, .section-sub,
+.hero-caption, .verse-ar, .verse-en, .verse-cite,
+.mini-steps strong, .mini-steps small, .rate, .billing-summary,
+.billing-label, .faq-q, .check-list, .plain-list,
+.stat dd, .stat dt, label, .footer-h, .footer-brand, .footer-tag {
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
 .skip-link {
   position: absolute;
   inset-inline-start: 1rem;
@@ -232,6 +252,11 @@ body.is-switching { opacity: 0; }
 .site-nav a:hover { color: var(--ink); }
 
 .header-actions { display: flex; align-items: center; gap: 0.65rem; }
+
+/* Contact link inside the collapsible panel (mobile only — the header
+   pill is hidden on very small screens, so Contact stays one tap away).
+   Specificity (0,2,0) must beat .btn's display so it stays hidden. */
+.site-nav .mobile-contact { display: none; }
 
 /* Circular outline toggle buttons */
 .icon-btn {
@@ -360,7 +385,7 @@ html[lang="ar"] .eyebrow { letter-spacing: 0.02em; }
   pointer-events: none;
 }
 .art-frame { margin: 0; position: relative; }
-.art-svg { display: block; width: 100%; height: auto; }
+.art-svg { display: block; width: 100%; height: auto; aspect-ratio: 380 / 500; }
 
 /* SVG scene paints (theme-aware via CSS variables) */
 .arch-frame {
@@ -394,9 +419,8 @@ html[data-theme="dark"] .book-shadow { fill: rgba(0, 0, 0, 0.55); }
 .leaves ellipse { fill: var(--leaf); }
 .vase { fill: var(--vase); stroke: var(--vase-shade); stroke-width: 1.4; }
 .vase-rim { fill: var(--vase-shade); }
-.book-cover { fill: #13453a; stroke: #0b2f27; stroke-width: 1.2; }
-html[data-theme="dark"] .book-cover { fill: #14352c; stroke: #0a201b; }
-.book-pages { fill: #e9e0c8; }
+.book-cover { fill: var(--book-cover); stroke: var(--book-spine); stroke-width: 1.2; }
+.book-pages { fill: var(--book-pages); }
 .book-trim { fill: none; stroke: var(--gold); stroke-width: 1.3; }
 .book-medal { fill: none; stroke: var(--gold); stroke-width: 1.3; }
 .book-medal-dot { fill: var(--gold); }
@@ -482,21 +506,10 @@ html[lang="ar"] .hero-quote p { font-family: var(--font-verse); font-style: norm
 
 /* ---------- 7. Sections ---------- */
 .section { padding: 3.6rem 0; }
-.section-alt { background: var(--bg-soft); border-block: 1px solid var(--line); transition: background-color var(--dur) var(--ease); }
+.section-alt { background: var(--bg-soft); border-block: 1px solid var(--line); transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
 .section-head { max-width: 640px; margin-bottom: 2rem; }
 .section-head h2 { margin-bottom: 0.4rem; }
 .section-sub { color: var(--body); }
-
-/* Generic hairline divider (kept for reuse between sections) */
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  color: var(--gold);
-  padding: 0.4rem 0;
-}
-.divider-line { height: 1px; width: min(180px, 30vw); background: var(--line); }
 
 /* ---------- 8. Cards ---------- */
 .card-grid {
@@ -560,6 +573,8 @@ html[lang="ar"] .hero-quote p { font-family: var(--font-verse); font-style: norm
 .tabs { max-width: 800px; }
 .tab-list {
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
   background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: 999px;
@@ -579,6 +594,7 @@ html[lang="ar"] .hero-quote p { font-family: var(--font-verse); font-style: norm
   transition: background-color 240ms ease, color 240ms ease;
 }
 .tab-btn.is-active { background: var(--brand); color: var(--brand-ink); }
+.tab-btn:not(.is-active):hover { color: var(--ink); background: color-mix(in srgb, var(--brand) 10%, transparent); }
 .tab-panel {
   background: var(--surface);
   border: 1px solid var(--card-border);
@@ -586,9 +602,8 @@ html[lang="ar"] .hero-quote p { font-family: var(--font-verse); font-style: norm
   padding: 1.6rem;
   box-shadow: var(--shadow);
   color: var(--body);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
-.path-for { color: var(--gold-deep); font-weight: 600; }
-html[data-theme="dark"] .path-for { color: var(--gold); }
 .path-note {
   margin-top: 1rem;
   background: var(--gold-soft);
@@ -623,6 +638,7 @@ html[data-theme="dark"] .path-for { color: var(--gold); }
   display: flex;
   flex-direction: column-reverse;
   gap: 0.3rem;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .stat dd { margin: 0; font-size: 1.5rem; font-weight: 600; color: var(--ink); font-family: var(--font-serif); }
 .stat dt { font-size: 0.88rem; color: var(--body); }
@@ -631,21 +647,6 @@ html[data-theme="dark"] .path-for { color: var(--gold); }
 .pricing-grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
 .price-card { display: flex; flex-direction: column; gap: 0.4rem; }
 .price-card .btn { margin-top: auto; }
-.price { font-size: 1.9rem; font-weight: 600; color: var(--ink); font-family: var(--font-serif); }
-.price small { font-size: 0.9rem; color: var(--body); font-weight: 400; font-family: var(--font-sans); }
-.price-card.featured { border: 1.5px solid var(--gold); }
-.card-badge {
-  position: absolute;
-  top: 1rem;
-  inset-inline-end: 1rem;
-  background: var(--gold);
-  color: #241c05;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.7rem;
-  border-radius: 999px;
-}
-html[data-theme="dark"] .card-badge { color: #1d1507; }
 .fine-print { font-size: 0.88rem; color: var(--muted); margin-top: 1.2rem; }
 
 /* ---------- 12. Steps ---------- */
@@ -664,7 +665,8 @@ html[data-theme="dark"] .card-badge { color: #1d1507; }
   padding: 1.4rem 1.2rem;
   box-shadow: var(--shadow);
   color: var(--body);
-  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease),
+    background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .step:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
 .step-num { color: var(--gold); font-weight: 600; font-size: 1.05rem; }
@@ -696,22 +698,58 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 20%, transparent);
 }
 textarea { resize: vertical; }
-.form-success {
-  background: var(--gold-soft);
+label.required::after { content: " *"; color: var(--gold-deep); }
+html[data-theme="dark"] label.required::after { color: var(--gold); }
+.btn[disabled] { opacity: 0.65; cursor: wait; transform: none; }
+.form-status {
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   padding: 0.8rem 1rem;
+  margin: 0;
   color: var(--ink);
+  background: var(--gold-soft);
 }
-.contact-side { display: grid; gap: 1rem; }
+.form-status[data-kind="err"] {
+  background: color-mix(in srgb, var(--danger) 12%, var(--surface));
+  border-color: var(--danger);
+}
+.contact-side { display: grid; gap: 1rem; align-content: start; }
 .whatsapp-card {
   display: flex;
   gap: 0.9rem;
   align-items: center;
   text-decoration: none;
 }
+/* Primary contact method: filled card that stands out next to the form */
+.whatsapp-card--primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  padding: 1.5rem 1.35rem;
+}
+.whatsapp-card--primary:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
 .whatsapp-card strong { display: block; font-size: 1.05rem; color: var(--ink); }
-.whatsapp-card small { color: var(--body); }
+.whatsapp-card--primary strong { color: var(--brand-ink); font-size: 1.2rem; }
+.whatsapp-card small { color: var(--body); line-height: 1.55; }
+.whatsapp-card--primary small { color: var(--brand-ink); opacity: 0.9; }
+.whatsapp-card--primary .wa-copy { display: grid; gap: 0.15rem; }
+.wa-number { font-weight: 600; direction: ltr; unicode-bidi: embed; }
+html[dir="rtl"] .wa-number { text-align: end; }
+.wa-badge {
+  margin-inline-start: auto;
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-ink);
+  background: color-mix(in srgb, var(--brand-ink) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-ink) 45%, transparent);
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+html[lang="ar"] .wa-badge { letter-spacing: 0; }
+.contact-email-card p { margin: 0; direction: ltr; unicode-bidi: embed; }
+html[dir="rtl"] .contact-email-card p { text-align: end; }
 .wa-icon {
   flex: none;
   width: 48px; height: 48px;
@@ -719,6 +757,12 @@ textarea { resize: vertical; }
   border-radius: 50%;
   background: var(--brand);
   color: var(--brand-ink);
+}
+.wa-icon--onfill {
+  width: 54px; height: 54px;
+  background: color-mix(in srgb, var(--brand-ink) 16%, transparent);
+  color: var(--brand-ink);
+  border: 1px solid color-mix(in srgb, var(--brand-ink) 40%, transparent);
 }
 
 /* ---------- 14. FAQ accordion ---------- */
@@ -728,7 +772,7 @@ textarea { resize: vertical; }
   border: 1px solid var(--card-border);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  transition: box-shadow 240ms var(--ease);
+  transition: box-shadow 240ms var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .faq-item.open { box-shadow: var(--shadow); }
 .faq-q {
@@ -746,7 +790,9 @@ textarea { resize: vertical; }
   text-align: start;
   padding: 1rem 1.2rem;
   cursor: pointer;
+  transition: background-color 220ms ease;
 }
+.faq-q:hover { background: color-mix(in srgb, var(--brand) 7%, transparent); }
 .faq-icon {
   flex: none;
   width: 30px; height: 30px;
@@ -792,7 +838,108 @@ textarea { resize: vertical; }
 }
 .footer-note { margin: 0; }
 
-/* ---------- 16. Scroll reveal ---------- */
+/* ---------- 16. Paths mini-steps (echoes the hero feature-row language) ---------- */
+.mini-steps {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.mini-steps li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-align: center;
+  padding: 0.2rem 1rem;
+}
+.mini-steps li + li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 14%;
+  bottom: 14%;
+  width: 1px;
+  background: var(--line);
+}
+.mini-num {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--gold);
+}
+html[lang="ar"] .mini-num { font-family: var(--font-verse); }
+.mini-steps strong { color: var(--ink); font-size: 0.98rem; line-height: 1.5; }
+.mini-steps small { color: var(--body); font-size: 0.86rem; line-height: 1.6; }
+
+/* ---------- 17. Pricing: five hourly cards + schedule selectors ---------- */
+.pricing-grid--five { grid-template-columns: repeat(6, 1fr); }
+.pricing-grid--five .price-card { grid-column: span 2; }
+.pricing-grid--five .price-card:nth-child(4) { grid-column: 2 / span 2; }
+.pricing-grid--five .price-card:nth-child(5) { grid-column: 4 / span 2; }
+.rate { font-size: 1.02rem; color: var(--ink); font-weight: 600; margin: 0.7rem 0 1rem; }
+.rate-token {
+  color: var(--gold-deep);
+  background: var(--gold-soft);
+  border: 1px dashed var(--gold);
+  padding: 0.05rem 0.55rem;
+  border-radius: 7px;
+  font-size: 0.95em;
+  white-space: nowrap;
+}
+html[data-theme="dark"] .rate-token { color: var(--gold); }
+.btn-sm { padding: 0.62rem 1.25rem; font-size: 0.92rem; }
+
+.billing {
+  margin-top: 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.4rem 1.5rem;
+  display: grid;
+  gap: 1rem;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.billing-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1rem;
+}
+.billing-label { font-weight: 600; color: var(--ink); margin: 0; min-width: 6.5rem; }
+.pill-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pill {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--body);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, transform 220ms var(--ease);
+}
+.pill:hover { border-color: var(--gold); color: var(--ink); transform: translateY(-1px); }
+.pill.is-selected {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+.billing-summary {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.06rem;
+}
+html[lang="ar"] .billing-summary { font-family: var(--font-verse); font-style: normal; }
+.billing .fine-print { margin: 0; }
+
+/* ---------- 18. Scroll reveal ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -801,7 +948,7 @@ textarea { resize: vertical; }
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 
-/* ---------- 17. Responsive ---------- */
+/* ---------- 19. Responsive ---------- */
 @media (max-width: 1020px) {
   .site-nav { display: none; }
   .menu-btn { display: inline-flex; }
@@ -827,25 +974,57 @@ textarea { resize: vertical; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .hero-features { grid-template-columns: repeat(2, 1fr); gap: 1.2rem 0; }
   .hero-features li:nth-child(3)::before { display: none; }
+  .pricing-grid--five { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid--five .price-card,
+  .pricing-grid--five .price-card:nth-child(4),
+  .pricing-grid--five .price-card:nth-child(5) { grid-column: auto; }
+  .mini-steps { grid-template-columns: repeat(2, 1fr); gap: 1.3rem 0; }
+  .mini-steps li:nth-child(3)::before { display: none; }
 }
 
 @media (max-width: 600px) {
-  .btn-contact { display: none; } /* Contact stays one tap away in the menu panel */
+  .btn-contact { display: none; } /* Header pill hides; Contact lives in the menu panel instead */
+  .site-nav.open .mobile-contact { display: inline-flex; margin-top: 0.3rem; }
   .brand-name { font-size: 1.2rem; }
   .hero { padding-top: 2.2rem; }
   .hero-actions .btn { width: 100%; }
   .hero-art { grid-template-columns: 1fr; }
+  .verse-ar { font-size: 1.32rem; }
+  .verse-en { font-size: 0.92rem; }
+  .hero-features svg { width: 28px; height: 28px; }
+  .hero-features span { font-size: 0.95rem; }
   .verse { border-inline-start: 0; border-top: 1px solid var(--line); padding-inline-start: 0; padding-top: 1.1rem; }
   .verse::before { inset-inline-start: 50%; top: -3px; }
   .hero-features { grid-template-columns: 1fr; }
   .hero-features li + li::before { display: none; }
   .hero-features li { border-top: 1px solid var(--line); padding-top: 1.2rem; }
   .hero-features li:first-child { border-top: 0; }
+  .mini-steps { grid-template-columns: 1fr; }
+  .mini-steps li + li::before { display: none; }
+  .mini-steps li { border-top: 1px solid var(--line); padding-top: 1.1rem; }
+  .mini-steps li:first-child { border-top: 0; }
+  .pricing-grid--five { grid-template-columns: 1fr; }
+  .billing-row { align-items: flex-start; flex-direction: column; }
   .card-grid, .steps { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr; max-width: 320px; margin-inline: auto; width: 100%; }
+  .tab-list { border-radius: 18px; }
+  .tab-btn { padding: 0.55rem 1rem; font-size: 0.93rem; }
   .footer-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- 18. Reduced motion ---------- */
+/* Very small screens: compact the header so brand + 3 circular buttons fit */
+@media (max-width: 480px) {
+  .container { width: calc(100% - 2rem); }
+  .header-inner { gap: 0.6rem; }
+  .brand { gap: 0.45rem; }
+  .brand-mark svg { width: 28px; height: 28px; }
+  .brand-name { font-size: 1rem; }
+  .header-actions { gap: 0.4rem; }
+  .icon-btn { width: 38px; height: 38px; font-size: 0.78rem; }
+  h1 { font-size: clamp(2rem, 11vw, 2.4rem); }
+}
+
+/* ---------- 20. Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

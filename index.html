@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#faf6ed" />
   <meta
     name="description"
     content="Online Quran teacher: Tajweed, recitation correction and Hifz for non-Arabs and diaspora Arabs."
@@ -25,6 +26,8 @@
   />
 
   <link rel="stylesheet" href="styles.css" />
+  <!-- No-JS fallback: scroll-reveal content must never stay invisible -->
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 
 <body>
@@ -57,6 +60,8 @@
         <a href="#experience" data-i18n="navExperience">Experience</a>
         <a href="#pricing" data-i18n="navPricing">Pricing</a>
         <a href="#faq" data-i18n="navFaq">FAQ</a>
+        <!-- Mobile-only Contact: the header pill hides on tiny screens -->
+        <a href="#contact" class="btn btn-contact mobile-contact" data-i18n="navContact">Contact</a>
       </nav>
 
       <!-- Actions: filled Contact pill + circular toggles + circular menu -->
@@ -120,8 +125,8 @@
         <div class="hero-art reveal">
           <figure class="art-frame">
             <svg class="art-svg" viewBox="0 0 380 500" role="img" aria-labelledby="artTitle artDesc">
-              <title id="artTitle">Mihrab niche with olive branch and Quran books</title>
-              <desc id="artDesc">A softly lit arched niche with geometric pattern, a potted olive branch, and two ornate Quran books on marble.</desc>
+              <title id="artTitle" data-i18n="artTitle">Mihrab niche with olive branch and Quran books</title>
+              <desc id="artDesc" data-i18n="artDesc">A softly lit arched niche with geometric pattern, a potted olive branch, and two ornate Quran books on marble.</desc>
               <defs>
                 <pattern id="artPattern" width="34" height="34" patternUnits="userSpaceOnUse">
                   <g class="art-pat">
@@ -281,14 +286,14 @@
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="container narrow reveal">
         <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
-        <h2 id="about-title" data-i18n="aboutTitle">[Placeholder] My journey with the Quran</h2>
-        <p class="lead" data-i18n="aboutLead">[Placeholder] Lead sentence: 1–2 lines summarising who you are as a teacher.</p>
-        <p data-i18n="aboutP1">[Placeholder] Paragraph 1: personal journey with the Quran — study, teachers/ijazah, motivation to teach.</p>
-        <p data-i18n="aboutP2">[Placeholder] Paragraph 2: teaching philosophy — patience, love for the Quran, focus on non-Arab and diaspora students.</p>
+        <h2 id="about-title" data-i18n="aboutTitle">My journey with the Quran</h2>
+        <p class="lead" data-i18n="aboutLead">I teach the Quran the way I wish every beginner could be taught: slowly, warmly, and with room to make mistakes.</p>
+        <p data-i18n="aboutP1">My own path with the Quran taught me that beautiful recitation is a skill anyone can build — not a talent reserved for native Arabic speakers. That conviction is what brought me to teaching students from all over the world.</p>
+        <p data-i18n="aboutP2">Today I teach non-Arabic speakers and diaspora Arab families online, one to one. My lessons are calm and structured: we fix one thing at a time, we revise constantly, and no one is ever rushed.</p>
         <ul class="check-list">
-          <li data-i18n="aboutItem1">[Placeholder] Value / highlight 1 — e.g. patient with beginners</li>
-          <li data-i18n="aboutItem2">[Placeholder] Value / highlight 2 — e.g. clear Tajweed breakdown</li>
-          <li data-i18n="aboutItem3">[Placeholder] Value / highlight 3 — e.g. flexible scheduling</li>
+          <li data-i18n="aboutItem1">Patient with absolute beginners</li>
+          <li data-i18n="aboutItem2">Tajweed explained in plain words</li>
+          <li data-i18n="aboutItem3">A plan that fits your week</li>
         </ul>
       </div>
     </section>
@@ -298,30 +303,30 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="teachEyebrow">What I Teach</p>
-          <h2 id="teach-title" data-i18n="teachTitle">[Placeholder] Four ways I can help you</h2>
-          <p class="section-sub" data-i18n="teachSub">[Placeholder] Short intro line: all lessons are live 1-on-1, online.</p>
+          <h2 id="teach-title" data-i18n="teachTitle">Four ways I can help you</h2>
+          <p class="section-sub" data-i18n="teachSub">All lessons are live, one-to-one, and online.</p>
         </div>
 
         <div class="card-grid">
           <article class="card reveal">
             <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
             <h3 data-i18n="teach1Title">Tajweed</h3>
-            <p data-i18n="teach1Desc">[Placeholder] Rules of Tajweed explained simply, with guided practice.</p>
+            <p data-i18n="teach1Desc">Tajweed rules explained in plain words, then trained on real verses.</p>
           </article>
           <article class="card reveal">
             <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
             <h3 data-i18n="teach2Title">Recitation Correction</h3>
-            <p data-i18n="teach2Desc">[Placeholder] Fix pronunciation and fluency, verse by verse.</p>
+            <p data-i18n="teach2Desc">We correct your pronunciation and fluency verse by verse, until it flows.</p>
           </article>
           <article class="card reveal">
             <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
             <h3 data-i18n="teach3Title">Hifz (Memorization)</h3>
-            <p data-i18n="teach3Desc">[Placeholder] Structured memorization plan with revision system.</p>
+            <p data-i18n="teach3Desc">A steady memorization plan with a revision cycle that keeps it.</p>
           </article>
           <article class="card reveal">
             <span class="card-tag" data-i18n="teachTag">Live · 1-on-1</span>
             <h3 data-i18n="teach4Title">Arabic Reading from Scratch</h3>
-            <p data-i18n="teach4Desc">[Placeholder] Noorani-style foundation for complete beginners.</p>
+            <p data-i18n="teach4Desc">From the Arabic letters to fluent reading, with correct makharij from day one.</p>
           </article>
         </div>
       </div>
@@ -332,8 +337,8 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="pathsEyebrow">Learning Paths</p>
-          <h2 id="paths-title" data-i18n="pathsTitle">[Placeholder] Choose your track</h2>
-          <p class="section-sub" data-i18n="pathsSub">[Placeholder] Two clear tracks — pick one, or ask for guidance in the free trial.</p>
+          <h2 id="paths-title" data-i18n="pathsTitle">Choose your path</h2>
+          <p class="section-sub" data-i18n="pathsSub">Two tracks, one goal: a confident relationship with the Quran.</p>
         </div>
 
         <div class="tabs reveal">
@@ -343,29 +348,57 @@
           </div>
 
           <div class="tab-panel is-active" id="panel-correction" role="tabpanel" aria-labelledby="tab-correction" tabindex="0">
-            <h3 data-i18n="pathCorrTitle">[Placeholder] Path A — Recitation Correction</h3>
-            <p data-i18n="pathCorrDesc">[Placeholder] For students who can read Arabic but want accurate, fluent, beautiful recitation.</p>
-            <p class="path-for" data-i18n="pathCorrFor">[Placeholder] Best for: beginners · returners · diaspora Arabs</p>
-            <ul class="check-list">
-              <li data-i18n="pathCorrLi1">[Placeholder] Level check + personal correction plan</li>
-              <li data-i18n="pathCorrLi2">[Placeholder] Tajweed applied directly on your recitation</li>
-              <li data-i18n="pathCorrLi3">[Placeholder] Fluency drills, short surahs → longer passages</li>
-              <li data-i18n="pathCorrLi4">[Placeholder] Regular feedback + practice recordings</li>
-            </ul>
-            <p class="path-note" data-i18n="pathCorrNote">[Placeholder] Outcome: confident, correct recitation of Juz’ 30 → beyond.</p>
+            <h3 data-i18n="pathCorrTitle">Recitation Correction Path</h3>
+            <p data-i18n="pathCorrDesc">For students who can already read Arabic and want precise, beautiful recitation.</p>
+            <ol class="mini-steps">
+              <li>
+                <span class="mini-num" aria-hidden="true">1</span>
+                <strong data-i18n="pathCorrS1T">Recitation assessment</strong>
+                <small data-i18n="pathCorrS1D">I listen to your recitation and map every issue.</small>
+              </li>
+              <li>
+                <span class="mini-num" aria-hidden="true">2</span>
+                <strong data-i18n="pathCorrS2T">Pinpoint weak points</strong>
+                <small data-i18n="pathCorrS2D">Makharij al-huruf and Tajweed rules that need work.</small>
+              </li>
+              <li>
+                <span class="mini-num" aria-hidden="true">3</span>
+                <strong data-i18n="pathCorrS3T">Structured correction plan</strong>
+                <small data-i18n="pathCorrS3D">A clear order for what we fix first, and how.</small>
+              </li>
+              <li>
+                <span class="mini-num" aria-hidden="true">4</span>
+                <strong data-i18n="pathCorrS4T">Practice every session</strong>
+                <small data-i18n="pathCorrS4D">Guided practice and review in each lesson.</small>
+              </li>
+            </ol>
           </div>
 
           <div class="tab-panel" id="panel-hifz" role="tabpanel" aria-labelledby="tab-hifz" tabindex="0" hidden>
-            <h3 data-i18n="pathHifzTitle">[Placeholder] Path B — Memorization (Hifz)</h3>
-            <p data-i18n="pathHifzDesc">[Placeholder] For students who recite correctly and want to memorize with strong retention.</p>
-            <p class="path-for" data-i18n="pathHifzFor">[Placeholder] Best for: committed learners · youth &amp; adults</p>
-            <ul class="check-list">
-              <li data-i18n="pathHifzLi1">[Placeholder] Memorization amount tailored to your capacity</li>
-              <li data-i18n="pathHifzLi2">[Placeholder] Daily revision cycle (near + distant revision)</li>
-              <li data-i18n="pathHifzLi3">[Placeholder] Tajweed-checked memorization, not rushed</li>
-              <li data-i18n="pathHifzLi4">[Placeholder] Monthly progress review with parents / student</li>
-            </ul>
-            <p class="path-note" data-i18n="pathHifzNote">[Placeholder] Outcome: steady, retained Hifz with itqan (mastery).</p>
+            <h3 data-i18n="pathHifzTitle">Memorization (Hifz) Path</h3>
+            <p data-i18n="pathHifzDesc">For new or continuing memorizers — complete beginners start from the Arabic letters.</p>
+            <ol class="mini-steps">
+              <li>
+                <span class="mini-num" aria-hidden="true">1</span>
+                <strong data-i18n="pathHifzS1T">Starting-point assessment</strong>
+                <small data-i18n="pathHifzS1D">From the Arabic letters if needed — wherever you are.</small>
+              </li>
+              <li>
+                <span class="mini-num" aria-hidden="true">2</span>
+                <strong data-i18n="pathHifzS2T">Set memorization targets</strong>
+                <small data-i18n="pathHifzS2D">Realistic goals by Surah or Juz, at your pace.</small>
+              </li>
+              <li>
+                <span class="mini-num" aria-hidden="true">3</span>
+                <strong data-i18n="pathHifzS3T">Structured revision cycle</strong>
+                <small data-i18n="pathHifzS3D">New memorization plus steady daily review.</small>
+              </li>
+              <li>
+                <span class="mini-num" aria-hidden="true">4</span>
+                <strong data-i18n="pathHifzS4T">Track progress by Juz</strong>
+                <small data-i18n="pathHifzS4D">Clear milestones, so you always know where you stand.</small>
+              </li>
+            </ol>
           </div>
 
           <p class="paths-cta">
@@ -380,27 +413,27 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="expEyebrow">Experience</p>
-          <h2 id="exp-title" data-i18n="expTitle">[Placeholder] Teaching background</h2>
-          <p class="section-sub" data-i18n="expLead">[Placeholder] Summary line: years, settings, student types.</p>
+          <h2 id="exp-title" data-i18n="expTitle">Online teaching, personal attention</h2>
+          <p class="section-sub" data-i18n="expLead">One-to-one Quran lessons for non-Arabs and diaspora families — structured, patient, and consistent.</p>
         </div>
         <div class="exp-grid">
           <div class="reveal">
-            <p data-i18n="expP1">[Placeholder] Paragraph: online teaching experience, non-Arab and diaspora Arab students, teaching style, any ijazah/certification to be listed here later.</p>
-            <p class="path-note" data-i18n="expNote">[Placeholder] Credentials line: e.g. Ijazah / certification details go here.</p>
+            <p data-i18n="expP1">I teach students of all ages across many time zones, from absolute beginners learning their first letters to advanced readers refining their recitation. Every student follows a personal plan, and every lesson ends with something clear to practise.</p>
+            <p class="path-note" data-i18n="expNote">Want to know more about my background? Ask me anything in the free trial lesson.</p>
           </div>
-          <!-- Placeholder stat cards — replace numbers with real ones later -->
+          <!-- Lesson-format facts, consistent with the FAQ and Pricing sections -->
           <dl class="stat-row reveal">
             <div class="stat">
-              <dt data-i18n="expStat1Label">[Placeholder] Years teaching</dt>
-              <dd data-i18n="expStat1Num">[Placeholder] 5+</dd>
+              <dt data-i18n="expStat1Label">Private live lessons</dt>
+              <dd data-i18n="expStat1Num">1-on-1</dd>
             </div>
             <div class="stat">
-              <dt data-i18n="expStat2Label">[Placeholder] Students taught</dt>
-              <dd data-i18n="expStat2Num">[Placeholder] 100+</dd>
+              <dt data-i18n="expStat2Label">Focused hourly sessions</dt>
+              <dd data-i18n="expStat2Num">60 min</dd>
             </div>
             <div class="stat">
-              <dt data-i18n="expStat3Label">[Placeholder] Countries / time zones</dt>
-              <dd data-i18n="expStat3Num">[Placeholder] 10+</dd>
+              <dt data-i18n="expStat3Label">Sessions a week, your choice</dt>
+              <dd data-i18n="expStat3Num">1–3×</dd>
             </div>
           </dl>
         </div>
@@ -412,47 +445,73 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="pricingEyebrow">Pricing</p>
-          <h2 id="pricing-title" data-i18n="pricingTitle">[Placeholder] Simple packages</h2>
-          <p class="section-sub" data-i18n="pricingSub">[Placeholder] Hourly pricing + package tiers. Final prices to be added later.</p>
+          <h2 id="pricing-title" data-i18n="pricingTitle">Simple hourly pricing</h2>
+          <p class="section-sub" data-i18n="pricingSub">Pick the program that fits — every package is billed per hour, with no fixed monthly prices.</p>
         </div>
 
-        <div class="card-grid pricing-grid">
+        <!-- TODO: replace every [YOUR_HOURLY_RATE] below with your real hourly rate -->
+        <div class="card-grid pricing-grid pricing-grid--five">
           <article class="card price-card reveal">
-            <h3 data-i18n="price1Name">[Placeholder] Single Lesson</h3>
-            <p class="price"><span data-i18n="price1Price">[Placeholder] $X</span> <small data-i18n="price1Per">[Placeholder] / lesson</small></p>
-            <ul class="plain-list">
-              <li data-i18n="price1F1">[Placeholder] 45–60 min live lesson</li>
-              <li data-i18n="price1F2">[Placeholder] Personal feedback</li>
-              <li data-i18n="price1F3">[Placeholder] No commitment</li>
-            </ul>
-            <a href="#contact" class="btn btn-outline" data-i18n="price1Cta">Book trial</a>
-          </article>
-
-          <article class="card price-card featured reveal">
-            <span class="card-badge" data-i18n="price2Badge">[Placeholder] Most popular</span>
-            <h3 data-i18n="price2Name">[Placeholder] Monthly — 2× / week</h3>
-            <p class="price"><span data-i18n="price2Price">[Placeholder] $XX</span> <small data-i18n="price2Per">[Placeholder] / month (8 lessons)</small></p>
-            <ul class="plain-list">
-              <li data-i18n="price2F1">[Placeholder] Fixed weekly slots</li>
-              <li data-i18n="price2F2">[Placeholder] Structured plan + revision</li>
-              <li data-i18n="price2F3">[Placeholder] Progress notes</li>
-              <li data-i18n="price2F4">[Placeholder] Rescheduling policy</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary" data-i18n="price2Cta">Choose plan</a>
+            <span class="card-tag" data-i18n="pack1Tag">From zero</span>
+            <h3 data-i18n="pack1Name">Starter / Foundations</h3>
+            <p data-i18n="pack1Desc">Arabic letters and makharij al-huruf, from absolute zero.</p>
+            <p class="rate"><span data-i18n="packPricePre">Starting at $</span><span class="rate-token">[YOUR_HOURLY_RATE]</span><span data-i18n="packPricePost">/hour</span></p>
+            <a href="#contact" class="btn btn-outline btn-sm" data-i18n="packCta">Book free trial</a>
           </article>
 
           <article class="card price-card reveal">
-            <h3 data-i18n="price3Name">[Placeholder] Monthly — 3× / week (Hifz)</h3>
-            <p class="price"><span data-i18n="price3Price">[Placeholder] $XX</span> <small data-i18n="price3Per">[Placeholder] / month (12 lessons)</small></p>
-            <ul class="plain-list">
-              <li data-i18n="price3F1">[Placeholder] Intensive Hifz + revision</li>
-              <li data-i18n="price3F2">[Placeholder] Daily practice guidance</li>
-              <li data-i18n="price3F3">[Placeholder] Monthly parent review</li>
-            </ul>
-            <a href="#contact" class="btn btn-outline" data-i18n="price3Cta">Choose plan</a>
+            <span class="card-tag" data-i18n="pack2Tag">Readers</span>
+            <h3 data-i18n="pack2Name">Tajweed Mastery</h3>
+            <p data-i18n="pack2Desc">Focused correction of Tajweed rules for students who already read.</p>
+            <p class="rate"><span data-i18n="packPricePre">Starting at $</span><span class="rate-token">[YOUR_HOURLY_RATE]</span><span data-i18n="packPricePost">/hour</span></p>
+            <a href="#contact" class="btn btn-outline btn-sm" data-i18n="packCta">Book free trial</a>
+          </article>
+
+          <article class="card price-card reveal">
+            <span class="card-tag" data-i18n="pack3Tag">All levels</span>
+            <h3 data-i18n="pack3Name">Hifz Program</h3>
+            <p data-i18n="pack3Desc">Gradual memorization by Surah or Juz, with regular revision.</p>
+            <p class="rate"><span data-i18n="packPricePre">Starting at $</span><span class="rate-token">[YOUR_HOURLY_RATE]</span><span data-i18n="packPricePost">/hour</span></p>
+            <a href="#contact" class="btn btn-outline btn-sm" data-i18n="packCta">Book free trial</a>
+          </article>
+
+          <article class="card price-card reveal">
+            <span class="card-tag" data-i18n="pack4Tag">Ages 5+</span>
+            <h3 data-i18n="pack4Name">Kids Package</h3>
+            <p data-i18n="pack4Desc">The same program, paced and styled for children.</p>
+            <p class="rate"><span data-i18n="packPricePre">Starting at $</span><span class="rate-token">[YOUR_HOURLY_RATE]</span><span data-i18n="packPricePost">/hour</span></p>
+            <a href="#contact" class="btn btn-outline btn-sm" data-i18n="packCta">Book free trial</a>
+          </article>
+
+          <article class="card price-card reveal">
+            <span class="card-tag" data-i18n="pack5Tag">Advanced</span>
+            <h3 data-i18n="pack5Name">Ijazah Track</h3>
+            <p data-i18n="pack5Desc">Advanced recitation for students working toward formal Ijazah.</p>
+            <p class="rate"><span data-i18n="packPricePre">Starting at $</span><span class="rate-token">[YOUR_HOURLY_RATE]</span><span data-i18n="packPricePost">/hour</span></p>
+            <a href="#contact" class="btn btn-outline btn-sm" data-i18n="packCta">Book free trial</a>
           </article>
         </div>
-        <p class="fine-print reveal" data-i18n="pricingNote">[Placeholder] Note: sibling discounts · payment methods · cancellation policy go here.</p>
+
+        <!-- Schedule preferences: selectors only shape the schedule, never the rate -->
+        <div class="billing reveal">
+          <div class="billing-row">
+            <p class="billing-label" id="freqLabel" data-i18n="billingFreqLabel">How often?</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="freqLabel">
+              <button type="button" class="pill" role="radio" aria-checked="false" data-value="freq1"><span data-i18n="freq1">Once a week</span></button>
+              <button type="button" class="pill is-selected" role="radio" aria-checked="true" data-value="freq2"><span data-i18n="freq2">Twice a week</span></button>
+              <button type="button" class="pill" role="radio" aria-checked="false" data-value="freq3"><span data-i18n="freq3">Three times a week</span></button>
+            </div>
+          </div>
+          <div class="billing-row">
+            <p class="billing-label" id="fmtLabel" data-i18n="billingFormatLabel">Format</p>
+            <div class="pill-group" role="radiogroup" aria-labelledby="fmtLabel">
+              <button type="button" class="pill is-selected" role="radio" aria-checked="true" data-value="fmtSolo"><span data-i18n="fmtSolo">One-on-one</span></button>
+              <button type="button" class="pill" role="radio" aria-checked="false" data-value="fmtGroup"><span data-i18n="fmtGroup">Small group</span></button>
+            </div>
+          </div>
+          <p class="billing-summary" id="billingSummary" role="status"></p>
+          <p class="fine-print" data-i18n="billingNote">Frequency and format only shape your schedule — they never change the hourly rate.</p>
+        </div>
       </div>
     </section>
 
@@ -461,29 +520,29 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="howEyebrow">How It Works</p>
-          <h2 id="how-title" data-i18n="howTitle">[Placeholder] Start in four simple steps</h2>
-          <p class="section-sub" data-i18n="howSub">[Placeholder] From first message to regular lessons.</p>
+          <h2 id="how-title" data-i18n="howTitle">Start in four simple steps</h2>
+          <p class="section-sub" data-i18n="howSub">From your first message to regular lessons.</p>
         </div>
         <ol class="steps">
           <li class="step reveal">
             <span class="step-num" aria-hidden="true">١ · 1</span>
-            <h3 data-i18n="how1Title">[Placeholder] 1 · Book a free trial</h3>
-            <p data-i18n="how1Desc">[Placeholder] Send the form or WhatsApp message below.</p>
+            <h3 data-i18n="how1Title">1 · Book a free trial</h3>
+            <p data-i18n="how1Desc">Send the form or a WhatsApp message — it takes a minute.</p>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true">٢ · 2</span>
-            <h3 data-i18n="how2Title">[Placeholder] 2 · Level check</h3>
-            <p data-i18n="how2Desc">[Placeholder] Short recitation + goals discussion.</p>
+            <h3 data-i18n="how2Title">2 · Meet and assess</h3>
+            <p data-i18n="how2Desc">We talk goals while I listen to a short recitation.</p>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true">٣ · 3</span>
-            <h3 data-i18n="how3Title">[Placeholder] 3 · Personal plan</h3>
-            <p data-i18n="how3Desc">[Placeholder] Track, schedule, and materials agreed.</p>
+            <h3 data-i18n="how3Title">3 · Get your plan</h3>
+            <p data-i18n="how3Desc">Track, schedule, and materials — agreed together.</p>
           </li>
           <li class="step reveal">
             <span class="step-num" aria-hidden="true">٤ · 4</span>
-            <h3 data-i18n="how4Title">[Placeholder] 4 · Learn weekly</h3>
-            <p data-i18n="how4Desc">[Placeholder] Live lessons + practice between classes.</p>
+            <h3 data-i18n="how4Title">4 · Learn every week</h3>
+            <p data-i18n="how4Desc">Live lessons plus short practice between them.</p>
           </li>
         </ol>
       </div>
@@ -494,52 +553,63 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="contactEyebrow">Contact / Booking</p>
-          <h2 id="contact-title" data-i18n="contactTitle">[Placeholder] Book your free trial lesson</h2>
-          <p class="section-sub" data-i18n="contactSub">[Placeholder] Fill the form or message directly on WhatsApp. Reply time placeholder.</p>
+          <h2 id="contact-title" data-i18n="contactTitle">Book your free trial lesson</h2>
+          <p class="section-sub" data-i18n="contactSub">Send the form below — or message me directly on WhatsApp, whichever is easier. I usually reply within a day.</p>
         </div>
 
         <div class="contact-grid">
-          <!-- Placeholder form: front-end only for now (no backend wiring yet) -->
-          <form class="card form-card reveal" id="bookingForm" novalidate>
+          <!-- Booking form: posts to Formspree.
+               TODO: replace [FORMSPREE_ENDPOINT] with your real Formspree
+               form ID, e.g. https://formspree.io/f/xabc1234 -->
+          <form class="card form-card reveal" id="bookingForm" action="https://formspree.io/f/[FORMSPREE_ENDPOINT]" method="POST">
+            <input type="hidden" name="_subject" value="New free trial lesson request" />
             <div class="field">
-              <label for="fName" data-i18n="formNameLabel">Your name</label>
-              <input id="fName" name="name" type="text" autocomplete="name" required data-i18n-ph="formNamePh" placeholder="[Placeholder] e.g. Ahmed / Sarah" />
+              <label for="fName" class="required" data-i18n="formNameLabel">Your name</label>
+              <input id="fName" name="name" type="text" autocomplete="name" required data-i18n-ph="formNamePh" placeholder="e.g. Ahmed / Sarah" />
             </div>
             <div class="field">
-              <label for="fContact" data-i18n="formContactLabel">Email or WhatsApp number</label>
-              <input id="fContact" name="contact" type="text" autocomplete="email" required data-i18n-ph="formContactPh" placeholder="[Placeholder] How can I reach you?" />
+              <label for="fEmail" class="required" data-i18n="formEmailLabel">Email</label>
+              <input id="fEmail" name="email" type="email" autocomplete="email" required data-i18n-ph="formEmailPh" placeholder="you@example.com" />
             </div>
             <div class="field">
-              <label for="fLevel" data-i18n="formLevelLabel">Your level</label>
-              <select id="fLevel" name="level">
-                <option value="" data-i18n="formLevelDefault">Choose…</option>
-                <option value="beginner" data-i18n="formLevelOpt1">[Placeholder] Complete beginner (cannot read Arabic)</option>
-                <option value="correction" data-i18n="formLevelOpt2">[Placeholder] Can read, want Tajweed / correction</option>
-                <option value="hifz" data-i18n="formLevelOpt3">[Placeholder] Want to memorize (Hifz)</option>
+              <label for="fWhatsapp" data-i18n="formWhatsappLabel">WhatsApp number (optional)</label>
+              <input id="fWhatsapp" name="whatsapp" type="tel" autocomplete="tel" data-i18n-ph="formWhatsappPh" placeholder="e.g. +1 555 000 1234" />
+            </div>
+            <div class="field">
+              <label for="fTrack" class="required" data-i18n="formTrackLabel">Preferred track</label>
+              <select id="fTrack" name="track" required>
+                <option value="" data-i18n="formTrackDefault">Choose a track…</option>
+                <option value="correction" data-i18n="formTrackCorr">Recitation Correction</option>
+                <option value="hifz" data-i18n="formTrackHifz">Memorization (Hifz)</option>
+                <option value="unsure" data-i18n="formTrackUnsure">Not sure yet — help me decide</option>
               </select>
             </div>
             <div class="field">
-              <label for="fMsg" data-i18n="formMsgLabel">Message (goals, availability)</label>
-              <textarea id="fMsg" name="message" rows="4" data-i18n-ph="formMsgPh" placeholder="[Placeholder] e.g. I want my son (9) to memorize Juz’ 30…"></textarea>
+              <label for="fMsg" data-i18n="formMsgLabel">Message</label>
+              <textarea id="fMsg" name="message" rows="4" data-i18n-ph="formMsgPh" placeholder="Your goals, level, and the times that suit you…"></textarea>
             </div>
             <button class="btn btn-primary" type="submit" data-i18n="formSubmit">Send booking request</button>
-            <p class="fine-print" data-i18n="formNote">[Placeholder] Note: this demo form does not send yet — wiring comes later.</p>
-            <p class="form-success" id="formSuccess" role="status" hidden></p>
+            <p class="fine-print" data-i18n="formNote">Your details are only used to arrange your trial lesson.</p>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
           </form>
 
+          <!-- TODO: replace [YOUR_WHATSAPP_NUMBER] with your real number in
+               international format, e.g. https://wa.me/201001234567 -->
           <aside class="contact-side reveal">
-            <a class="card whatsapp-card" href="https://wa.me/0000000000" target="_blank" rel="noopener">
-              <span class="wa-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.2-4.8-4.1-5-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.5 2.6 1.6.3.2.5.1.7-.1l.8-.9c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.6Z"/></svg>
+            <a class="card whatsapp-card whatsapp-card--primary" href="https://wa.me/[YOUR_WHATSAPP_NUMBER]" target="_blank" rel="noopener">
+              <span class="wa-icon wa-icon--onfill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.2-4.8-4.1-5-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.5 2.6 1.6.3.2.5.1.7-.1l.8-.9c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.6Z"/></svg>
               </span>
-              <span>
-                <strong data-i18n="whatsappLabel">Message on WhatsApp</strong>
-                <small data-i18n="whatsappSub">[Placeholder] Fastest way to book · placeholder number</small>
+              <span class="wa-copy">
+                <strong data-i18n="whatsappLabel">Chat on WhatsApp</strong>
+                <small data-i18n="whatsappSub">The fastest way to reach me — tap to start a chat.</small>
+                <small class="wa-number" data-i18n="whatsappNumber">WhatsApp: [YOUR_WHATSAPP_NUMBER]</small>
               </span>
+              <span class="wa-badge" data-i18n="whatsappBadge">Fastest</span>
             </a>
-            <div class="card">
-              <h3 data-i18n="contactAltTitle">[Placeholder] Prefer email?</h3>
-              <p data-i18n="contactAltText">[Placeholder] teacher@example.com — replace with real address.</p>
+            <div class="card contact-email-card">
+              <h3 data-i18n="contactAltTitle">Prefer email?</h3>
+              <p data-i18n="contactEmail">Email: [YOUR_EMAIL]</p>
             </div>
           </aside>
         </div>
@@ -551,31 +621,39 @@
       <div class="container narrow">
         <div class="section-head reveal">
           <p class="eyebrow" data-i18n="faqEyebrow">FAQ</p>
-          <h2 id="faq-title" data-i18n="faqTitle">[Placeholder] Common questions</h2>
-          <p class="section-sub" data-i18n="faqSub">[Placeholder] Short answers — details in the trial lesson.</p>
+          <h2 id="faq-title" data-i18n="faqTitle">Questions, answered</h2>
+          <p class="section-sub" data-i18n="faqSub">Everything students usually ask before the trial lesson.</p>
         </div>
 
         <div class="faq-list reveal">
           <!-- Accordion wired in script.js (single-open, animated, accessible) -->
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false"><span data-i18n="faq1Q">[Placeholder] Who are lessons for?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" hidden><p data-i18n="faq1A">[Placeholder] Answer: non-Arabs, diaspora Arabs, kids &amp; adults, all levels.</p></div>
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq1Q">Do I need to already know Arabic to start?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq1A">Not at all. Complete beginners start from the Arabic letters in the Foundations program.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false"><span data-i18n="faq2Q">[Placeholder] Where do lessons happen?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" hidden><p data-i18n="faq2A">[Placeholder] Answer: live online via Zoom / Meet — link sent before class.</p></div>
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq2Q">How long is each session, and how often do we meet?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq2A">Sessions are one hour, once to three times a week.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false"><span data-i18n="faq3Q">[Placeholder] How long is a lesson?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" hidden><p data-i18n="faq3A">[Placeholder] Answer: typically 45–60 minutes, adjusted for kids.</p></div>
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq3Q">Do you teach both kids and adults?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq3A">Yes — kids and adults are both welcome.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false"><span data-i18n="faq4Q">[Placeholder] What do I need to prepare?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" hidden><p data-i18n="faq4A">[Placeholder] Answer: quiet place, Quran/mushaf, notebook. Nothing else.</p></div>
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq4Q">Is there a discount for siblings or group sessions?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq4A">Yes — siblings and small groups learn at reduced rates.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false"><span data-i18n="faq5Q">[Placeholder] How does payment work?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" hidden><p data-i18n="faq5A">[Placeholder] Answer: monthly packages, payment methods to be confirmed.</p></div>
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq5Q">What time zones / schedules are available?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq5A">Lessons run online across many time zones.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq6Q">What platform do we use for lessons?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq6A">We meet live on Zoom.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span data-i18n="faq7Q">What happens in the free trial lesson?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-a" hidden><p data-i18n="faq7A">We meet, assess your level, and build your personal plan.</p></div>
           </div>
         </div>
       </div>
@@ -587,7 +665,7 @@
     <div class="container footer-grid">
       <div>
         <p class="footer-brand" data-i18n="siteName">Quran Teacher</p>
-        <p class="footer-tag" data-i18n="footerTagline">[Placeholder] Short closing line — e.g. serving Quran learners worldwide.</p>
+        <p class="footer-tag" data-i18n="footerTagline">Serving Quran learners around the world.</p>
       </div>
       <nav aria-label="Footer">
         <p class="footer-h" data-i18n="footerExploreTitle">Explore</p>
@@ -600,16 +678,16 @@
       </nav>
       <div>
         <p class="footer-h" data-i18n="footerContactTitle">Contact</p>
-        <!-- TODO: replace with real contact/social links -->
+        <!-- Fill-in tokens below: replace [YOUR_EMAIL] and [YOUR_WHATSAPP_NUMBER] -->
         <ul class="plain-list footer-links">
-          <li><span data-i18n="footerEmailPh">teacher@example.com</span></li>
-          <li><span data-i18n="footerWhatsappPh">WhatsApp: +00 000 000 000</span></li>
+          <li><span data-i18n="footerEmailPh">[YOUR_EMAIL]</span></li>
+          <li><span data-i18n="footerWhatsappPh">WhatsApp: [YOUR_WHATSAPP_NUMBER]</span></li>
         </ul>
       </div>
     </div>
     <div class="container footer-bottom">
-      <p><span data-i18n="footerRights">[Placeholder] © year · Teacher name. All rights reserved.</span> · <span id="year">2026</span></p>
-      <p class="footer-note" data-i18n="footerNote">[Placeholder] Made with sincerity for the sake of Allah.</p>
+      <p><span data-i18n="footerRights">© Quran Teacher · All rights reserved.</span> · <span id="year">2026</span></p>
+      <p class="footer-note" data-i18n="footerNote">Made with sincerity for the sake of Allah.</p>
     </div>
   </footer>
 
